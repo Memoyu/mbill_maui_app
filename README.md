@@ -28,7 +28,7 @@
 
 ✨[采用.NET5实现的后端服务 - Memoyu/mbill_service](https://github.com/Memoyu/mbill_service)
 
-✨[采用Wepy实现的小程序前端 - Memoyu/mbill_wechat_app](https://github.com/Memoyu/mbill_wechat_app)
+✨[采用uni-app实现的小程序前端 - Memoyu/mbill_wechat_app](https://github.com/Memoyu/mbill_wechat_app)
 
 ✨ [采用Blazor+Ant Blazor实现后端管理 - Memoyu/mbill_blazor_admin](https://github.com/Memoyu/mbill_blazor_admin)
 
