@@ -1,20 +1,30 @@
 ﻿using mbill.xamarin.app.Services;
-using mbill.xamarin.app.Views;
-using System;
+using mbill.xamarin.app.Views.Index;
+using Prism.Ioc;
+using Prism.Unity;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace mbill.xamarin.app
 {
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
 
         public App()
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            //DependencyService.Register<MockDataStore>();
+            //MainPage = new AppShell();
+        }
+
+        protected override async void OnInitialized()
+        {
+            await NavigationService.NavigateAsync("/NavigationPage/HomePage");
+        }
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<HomePage>();
         }
 
         protected override void OnStart()
@@ -28,5 +38,8 @@ namespace mbill.xamarin.app
         protected override void OnResume()
         {
         }
+      
+
+       
     }
 }
