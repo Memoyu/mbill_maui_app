@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mbill.Maui.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mdc="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+    xmlns:vm="clr-namespace:Mbill.Maui.ViewModels"
+    vm:ViewModelManager.AutoWireViewModel="True">
+    <Grid>
+        <mdc:Button
+            Grid.Row="0"
+            Grid.Column="0"
+            IconKind="Add"
+            Text="{Binding Title, Mode=TwoWay}" />
+        <Grid
+            Margin="10,0,10,10"
+            HeightRequest="50"
+            HorizontalOptions="Fill"
+            VerticalOptions="End">
+            <Border
+                BackgroundColor="{StaticResource Primary}"
+                HeightRequest="50"
+                HorizontalOptions="Fill"
+                StrokeThickness="0"
+                VerticalOptions="End">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="35" />
+                </Border.StrokeShape>
+            </Border>
+            <FlexLayout
+                Padding="0"
+                Direction="Row"
+                IsClippedToBounds="False"
+                JustifyContent="SpaceAround">
+                <mdc:Button
+                    Command="{Binding ExecuteCommand}"
+                    CommandParameter="Bill"
+                    Style="{StaticResource TextButtonStyle}"
+                    Text="账本" />
+                <Border
+                    Margin="0,0,0,60"
+                    BackgroundColor="{StaticResource Primary}"
+                    HeightRequest="70"
+                    StrokeThickness="0"
+                    WidthRequest="70">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="100" />
+                    </Border.StrokeShape>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="30"
+                        Style="{StaticResource IconLabelStyle}"
+                        Text="{StaticResource Plus}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </Border>
+                <mdc:Button
+                    Command="{Binding ExecuteCommand}"
+                    CommandParameter="Profile"
+                    Style="{StaticResource TextButtonStyle}"
+                    Text="我的" />
+            </FlexLayout>
+
+        </Grid>
+
+    </Grid>
+</ContentPage>
