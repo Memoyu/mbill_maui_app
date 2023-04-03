@@ -54,6 +54,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\iconfont.ttf" />
+	  <None Remove="Resources\Images\avatar.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,7 +70,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
 	  <Folder Include="ViewModels\Bill\" />
 	  <Folder Include="ViewModels\Profile\" />
 	  <Folder Include="Views\Bill\" />

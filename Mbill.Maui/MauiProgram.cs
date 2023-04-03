@@ -23,7 +23,8 @@ public static class MauiProgram
 #endif
 
         builder.Services.AddViewModels();
+        builder.Services.AddServices();
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

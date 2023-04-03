@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
-using System.Windows.Input;
+using Mbill.Maui.Models;
+using Mbill.Maui.Services;
 
 namespace Mbill.Maui.ViewModels
 {
@@ -9,14 +10,20 @@ namespace Mbill.Maui.ViewModels
         [ObservableProperty]
         private string title = "Text";
 
+        [ObservableProperty] private List<Planet> planets;
 
-        public MainPageViewModel()
+        private  readonly PlanetsService _planetsService;
+
+        public MainPageViewModel(PlanetsService planetsService)
         {
+            _planetsService = planetsService;
         }
 
         public async Task InitializeAsync()
         {
             Trace.WriteLine("msg");
+            Planets = _planetsService.GetAllPlanets();
+            await Task.CompletedTask;
         }
 
         /// <summary>
@@ -24,17 +31,10 @@ namespace Mbill.Maui.ViewModels
         /// </summary>
         /// <param name="arg">命名指向类型</param>
         [RelayCommand]
-        async Task ExecuteCommand(string arg)
+        async Task Execute(string arg)
         {
-            switch (arg)
-            {
-                case "Bill":
-                    title = "Bill";
-                    break;
-                case "ProfileTab":
-                    title = "Profile";
-                    break;
-            }
+            Title = arg;
+            await Task.CompletedTask;
         }
     }
 }

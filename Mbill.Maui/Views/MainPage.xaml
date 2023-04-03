@@ -4,64 +4,207 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mdc="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+    xmlns:models="clr-namespace:Mbill.Maui.Models"
     xmlns:vm="clr-namespace:Mbill.Maui.ViewModels"
     vm:ViewModelManager.AutoWireViewModel="True">
     <Grid>
-        <mdc:Button
-            Grid.Row="0"
-            Grid.Column="0"
-            IconKind="Add"
-            Text="{Binding Title, Mode=TwoWay}" />
         <Grid
-            Margin="10,0,10,10"
-            HeightRequest="50"
-            HorizontalOptions="Fill"
-            VerticalOptions="End">
-            <Border
-                BackgroundColor="{StaticResource Primary}"
-                HeightRequest="50"
-                HorizontalOptions="Fill"
-                StrokeThickness="0"
-                VerticalOptions="End">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="35" />
-                </Border.StrokeShape>
-            </Border>
-            <FlexLayout
-                Padding="0"
-                Direction="Row"
-                IsClippedToBounds="False"
-                JustifyContent="SpaceAround">
-                <mdc:Button
-                    Command="{Binding ExecuteCommand}"
-                    CommandParameter="Bill"
-                    Style="{StaticResource TextButtonStyle}"
-                    Text="账本" />
-                <Border
-                    Margin="0,0,0,60"
-                    BackgroundColor="{StaticResource Primary}"
-                    HeightRequest="70"
-                    StrokeThickness="0"
-                    WidthRequest="70">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="100" />
-                    </Border.StrokeShape>
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="30"
-                        Style="{StaticResource IconLabelStyle}"
-                        Text="{StaticResource Plus}"
-                        TextColor="White"
-                        VerticalTextAlignment="Center" />
-                </Border>
-                <mdc:Button
-                    Command="{Binding ExecuteCommand}"
-                    CommandParameter="Profile"
-                    Style="{StaticResource TextButtonStyle}"
-                    Text="我的" />
-            </FlexLayout>
+            Padding="20,52,20,0"
+            BackgroundColor="{StaticResource PageBackgroundColor}"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,*">
+            <!--  Header Text  -->
+            <VerticalStackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Spacing="4"
+                VerticalOptions="Center">
+                <Label Style="{StaticResource PageHeaderStyle}" Text="Memoyu" />
+                <Label Style="{StaticResource PageHeaderSubtitleStyle}" Text="已记账19990天" />
+            </VerticalStackLayout>
 
+            <!--  Profile Pic  -->
+            <Border
+                Grid.Row="0"
+                Grid.Column="1"
+                HeightRequest="70"
+                HorizontalOptions="End"
+                Stroke="{StaticResource Primary}"
+                StrokeThickness="6"
+                VerticalOptions="Center"
+                WidthRequest="70">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="28" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ExecuteCommand}" CommandParameter="5555" />
+                </Border.GestureRecognizers>
+                <Image
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    Source="avatar.png"
+                    VerticalOptions="Center"
+                    WidthRequest="50">
+                    <Image.Clip>
+                        <EllipseGeometry
+                            Center="25,25"
+                            RadiusX="25"
+                            RadiusY="25" />
+                    </Image.Clip>
+                </Image>
+            </Border>
+
+
+            <!--  Main Content ScrollView  -->
+            <ScrollView
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                HorizontalScrollBarVisibility="Never"
+                VerticalScrollBarVisibility="Never">
+                <Grid RowDefinitions="Auto,Auto,*,*,*">
+                    <Border
+                        Grid.Row="0"
+                        BackgroundColor="Yellow"
+                        HeightRequest="300"
+                        HorizontalOptions="Fill"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="6" />
+                        </Border.StrokeShape>
+                    </Border>
+                    <Border
+                        Grid.Row="1"
+                        BackgroundColor="blue"
+                        HeightRequest="300"
+                        HorizontalOptions="Fill"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="6" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout Spacing="12">
+                            <!--  Most Popular Section  -->
+                            <Label Margin="0,12,0,0" Style="{StaticResource PageHeaderSubtitleStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Most Popular   " />
+                                        <Span FontSize="20" Text="→" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <CollectionView
+                                HeightRequest="280"
+                                ItemsSource="{Binding Planets}"
+                                SelectionMode="Single">
+
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="16" Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Planet">
+                                        <Border
+                                            Padding="20"
+                                            Background="{Binding Background}"
+                                            StrokeThickness="0"
+                                            VerticalOptions="Fill"
+                                            WidthRequest="220">
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="24" />
+                                            </Border.StrokeShape>
+
+                                            <Grid RowDefinitions="*,Auto,Auto" RowSpacing="4">
+
+                                                <Image
+                                                    Grid.Row="0"
+                                                    Aspect="AspectFit"
+                                                    HorizontalOptions="Fill"
+                                                    Rotation="-30"
+                                                    Source="{Binding Images[0]}"
+                                                    VerticalOptions="Fill" />
+
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Margin="0,8,0,0"
+                                                    Style="{StaticResource FeaturedPlanetHeaderStyle}"
+                                                    Text="{Binding Name}" />
+
+                                                <Label
+                                                    Grid.Row="2"
+                                                    Style="{StaticResource FeaturedPlanetHeaderSubtitleStyle}"
+                                                    Text="{Binding Subtitle}" />
+
+                                            </Grid>
+
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border
+                        Grid.Row="2"
+                        BackgroundColor="Purple"
+                        HeightRequest="200"
+                        HorizontalOptions="Fill"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="6" />
+                        </Border.StrokeShape>
+
+                    </Border>
+
+                    <Border
+                        Grid.Row="3"
+                        BackgroundColor="Red"
+                        HeightRequest="200"
+                        HorizontalOptions="Fill"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="6" />
+                        </Border.StrokeShape>
+                    </Border>
+
+                    <Border
+                        Grid.Row="4"
+                        BackgroundColor="Green"
+                        HeightRequest="200"
+                        HorizontalOptions="Fill"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="6" />
+                        </Border.StrokeShape>
+                    </Border>
+                </Grid>
+            </ScrollView>
         </Grid>
 
+        <Border
+            Margin="0,0,20,20"
+            BackgroundColor="{StaticResource Primary}"
+            HeightRequest="56"
+            HorizontalOptions="End"
+            StrokeThickness="0"
+            VerticalOptions="End"
+            WidthRequest="56">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="100" />
+            </Border.StrokeShape>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ExecuteCommand}" CommandParameter="22222" />
+            </Border.GestureRecognizers>
+            <Label
+                FontAttributes="Bold"
+                FontSize="30"
+                Style="{StaticResource IconLabelStyle}"
+                Text="{StaticResource Plus}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Border>
     </Grid>
 </ContentPage>

@@ -395,6 +395,19 @@
         <Setter Property="Padding" Value="0" />
     </Style>
 
+    <!--  Label Styles  -->
+    <Style x:Key="BaseBoldLabeltyle" TargetType="Label">
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="FontAutoScalingEnabled" Value="False" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+    </Style>
+
+    <Style x:Key="BaseMediumLabeltyle" TargetType="Label">
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="FontAutoScalingEnabled" Value="False" />
+        <Setter Property="FontFamily" Value="MediumFont" />
+    </Style>
+
     <Style x:Key="BaseRegularLabeltyle" TargetType="Label">
         <Setter Property="LineBreakMode" Value="TailTruncation" />
         <Setter Property="FontAutoScalingEnabled" Value="False" />
@@ -402,13 +415,19 @@
     </Style>
 
     <Style
-        x:Key="MenuLabelStyle"
-        BasedOn="{StaticResource BaseRegularLabeltyle}"
+        x:Key="PageHeaderStyle"
+        BasedOn="{StaticResource BaseBoldLabeltyle}"
+        TargetType="Label">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="TextColor" Value="Black" />
+    </Style>
+
+    <Style
+        x:Key="PageHeaderSubtitleStyle"
+        BasedOn="{StaticResource BaseMediumLabeltyle}"
         TargetType="Label">
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="White" />
-        <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
     </Style>
 
     <Style x:Key="IconLabelStyle" TargetType="Label">
@@ -418,6 +437,22 @@
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="iconfont" />
+    </Style>
+
+    <Style
+        x:Key="FeaturedPlanetHeaderStyle"
+        BasedOn="{StaticResource BaseMediumLabeltyle}"
+        TargetType="Label">
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="TextColor" Value="{StaticResource Gray200}" />
+    </Style>
+
+    <Style
+        x:Key="FeaturedPlanetHeaderSubtitleStyle"
+        BasedOn="{StaticResource BaseRegularLabeltyle}"
+        TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource Gray200}" />
     </Style>
 
 </ResourceDictionary>
