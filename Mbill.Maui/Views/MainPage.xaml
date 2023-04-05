@@ -3,6 +3,7 @@
     x:Class="Mbill.Maui.Views.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:calendar="using:Mbill.Maui.Controls.Calendar"
     xmlns:mc="clr-namespace:Mbill.Maui.Controls"
     xmlns:mdc="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
     xmlns:models="clr-namespace:Mbill.Maui.Models"
@@ -62,7 +63,10 @@
                 VerticalScrollBarVisibility="Never">
                 <Grid RowDefinitions="Auto,Auto,*,*,*">
                     <!--  账本日历  -->
-                    <mc:Calendar Grid.Row="0" Grid.Column="0" />
+                    <calendar:CalendarView
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Days="{Binding CalendarDays, Mode=OneWayToSource}" />
 
 
                     <Border

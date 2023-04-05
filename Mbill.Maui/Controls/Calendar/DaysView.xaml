@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Mbill.Maui.Controls.Calendar.DaysView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="using:Mbill.Maui.Controls.Calendar.Model"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    x:Name="CalendarDaysView">
+    <CollectionView x:Name="MainCollectionView" BackgroundColor="Aqua">
+
+        <CollectionView.Resources>
+            <system:Boolean x:Key="FalseValue">False</system:Boolean>
+        </CollectionView.Resources>
+
+        <CollectionView.Style>
+            <Style TargetType="{x:Type CollectionView}">
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate x:DataType="{x:Type model:CalendarDay}">
+                            <Border
+                                Margin="2.5"
+                                BackgroundColor="Transparent"
+                                HeightRequest="45"
+                                WidthRequest="45">
+
+                                <Border.StrokeShape>
+                                    <Ellipse />
+                                </Border.StrokeShape>
+
+                                <Label Text="{Binding Day}" />
+
+                                <Border.GestureRecognizers>
+                                    <!--<TapGestureRecognizer Command="{Binding Command, Source={x:Reference CalendarDaysView}}" CommandParameter="{Binding CommandParameter, Source={x:Reference CalendarDaysView}}" />-->
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </CollectionView.Style>
+
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="{Binding DaysOfWeek.Count, Source={x:Reference CalendarDaysView}}" />
+        </CollectionView.ItemsLayout>
+
+    </CollectionView>
+</ContentView>

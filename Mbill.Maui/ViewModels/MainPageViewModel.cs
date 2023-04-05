@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
+using Mbill.Maui.Controls.Calendar.Model;
 using Mbill.Maui.Models;
 using Mbill.Maui.Services;
 
@@ -11,6 +12,8 @@ namespace Mbill.Maui.ViewModels
         private string title = "Text";
 
         [ObservableProperty] private List<Planet> planets;
+
+        [ObservableProperty] private  List<CalendarDay> calendarDays;
 
         private  readonly PlanetsService _planetsService;
 
@@ -35,6 +38,14 @@ namespace Mbill.Maui.ViewModels
         {
             Title = arg;
             await Task.CompletedTask;
+
+            var items = new List<CalendarDay>();
+            for (int i = 1; i < 32; i++)
+            {
+                items.Add(new CalendarDay { Day = i.ToString() });
+            }
+
+            CalendarDays = items;
         }
     }
 }

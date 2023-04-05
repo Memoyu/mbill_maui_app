@@ -78,7 +78,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\Calendar.xaml">
+	  <Compile Update="Controls\Calendar\CalendarView.xaml.cs">
+	    <DependentUpon>CalendarView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Controls\Calendar\DaysView.xaml.cs">
+	    <DependentUpon>DaysView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Controls\Calendar\CalendarView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\Calendar\DaysView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
