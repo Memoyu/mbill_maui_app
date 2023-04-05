@@ -399,19 +399,19 @@
     <Style x:Key="BaseBoldLabeltyle" TargetType="Label">
         <Setter Property="LineBreakMode" Value="TailTruncation" />
         <Setter Property="FontAutoScalingEnabled" Value="False" />
-        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
     </Style>
 
     <Style x:Key="BaseMediumLabeltyle" TargetType="Label">
         <Setter Property="LineBreakMode" Value="TailTruncation" />
         <Setter Property="FontAutoScalingEnabled" Value="False" />
-        <Setter Property="FontFamily" Value="MediumFont" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
     </Style>
 
     <Style x:Key="BaseRegularLabeltyle" TargetType="Label">
         <Setter Property="LineBreakMode" Value="TailTruncation" />
         <Setter Property="FontAutoScalingEnabled" Value="False" />
-        <Setter Property="FontFamily" Value="RegularFont" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
     </Style>
 
     <Style

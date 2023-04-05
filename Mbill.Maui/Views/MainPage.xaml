@@ -3,14 +3,16 @@
     x:Class="Mbill.Maui.Views.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mc="clr-namespace:Mbill.Maui.Controls"
     xmlns:mdc="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
     xmlns:models="clr-namespace:Mbill.Maui.Models"
     xmlns:vm="clr-namespace:Mbill.Maui.ViewModels"
-    vm:ViewModelManager.AutoWireViewModel="True">
+    vm:ViewModelManager.AutoWireViewModel="True"
+    x:DataType="{x:Type vm:MainPageViewModel}">
     <Grid>
         <Grid
             Padding="20,52,20,0"
-            BackgroundColor="{StaticResource PageBackgroundColor}"
+            BackgroundColor="{StaticResource White}"
             ColumnDefinitions="*,Auto"
             RowDefinitions="Auto,*">
             <!--  Header Text  -->
@@ -28,22 +30,18 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 HeightRequest="70"
-                HorizontalOptions="End"
                 Stroke="{StaticResource Primary}"
-                StrokeThickness="6"
-                VerticalOptions="Center"
+                StrokeThickness="1 "
                 WidthRequest="70">
                 <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="28" />
+                    <RoundRectangle CornerRadius="100" />
                 </Border.StrokeShape>
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ExecuteCommand}" CommandParameter="5555" />
                 </Border.GestureRecognizers>
                 <Image
                     HeightRequest="50"
-                    HorizontalOptions="Center"
                     Source="avatar.png"
-                    VerticalOptions="Center"
                     WidthRequest="50">
                     <Image.Clip>
                         <EllipseGeometry
@@ -63,20 +61,15 @@
                 HorizontalScrollBarVisibility="Never"
                 VerticalScrollBarVisibility="Never">
                 <Grid RowDefinitions="Auto,Auto,*,*,*">
-                    <Border
-                        Grid.Row="0"
-                        BackgroundColor="Yellow"
-                        HeightRequest="300"
-                        HorizontalOptions="Fill"
-                        StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="6" />
-                        </Border.StrokeShape>
-                    </Border>
+                    <!--  账本日历  -->
+                    <mc:Calendar Grid.Row="0" Grid.Column="0" />
+
+
                     <Border
                         Grid.Row="1"
+                        Padding="10"
                         BackgroundColor="blue"
-                        HeightRequest="300"
+                        HeightRequest="380"
                         HorizontalOptions="Fill"
                         StrokeThickness="0">
                         <Border.StrokeShape>
@@ -95,7 +88,7 @@
                             </Label>
 
                             <CollectionView
-                                HeightRequest="280"
+                                HeightRequest="300"
                                 ItemsSource="{Binding Planets}"
                                 SelectionMode="Single">
 
@@ -118,13 +111,13 @@
 
                                             <Grid RowDefinitions="*,Auto,Auto" RowSpacing="4">
 
-                                                <Image
+                                                <!--<Image
                                                     Grid.Row="0"
                                                     Aspect="AspectFit"
                                                     HorizontalOptions="Fill"
                                                     Rotation="-30"
                                                     Source="{Binding Images[0]}"
-                                                    VerticalOptions="Fill" />
+                                                    VerticalOptions="Fill" />-->
 
                                                 <Label
                                                     Grid.Row="1"
