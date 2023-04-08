@@ -2,7 +2,7 @@
 {
     public class CalendarDay
     {
-        public string Day { get; set; }
+        public DateTime Date { get; set; }
         public bool IsSelected { get; set; }
         public bool IsCurrentMonth { get; set; }
         public bool IsToday { get; set; }

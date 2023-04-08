@@ -4,32 +4,45 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:calendar="using:Mbill.Maui.Controls.Calendar"
-    xmlns:mc="clr-namespace:Mbill.Maui.Controls"
     x:Name="CalendarContainerView"
     x:DataType="{x:Type calendar:CalendarView}">
     <VerticalStackLayout Spacing="0">
-        <VerticalStackLayout.Resources>
-            <DataTemplate x:Key="DaysOfWeekItemTemplate">
-                <Label
-                    FontSize="15"
-                    HorizontalTextAlignment="Center"
-                    Text="{Binding .}"
-                    TextColor="Black"
-                    VerticalTextAlignment="Center" />
-            </DataTemplate>
-        </VerticalStackLayout.Resources>
         <!--  日期名称  -->
-        <FlexLayout
-            Margin="15,0"
-            AlignItems="Center"
-            BindableLayout.ItemTemplate="{StaticResource DaysOfWeekItemTemplate}"
-            BindableLayout.ItemsSource="{Binding DaysOfWeek, Source={x:Reference CalendarContainerView}}"
-            Direction="Row"
-            HeightRequest="25"
-            JustifyContent="SpaceBetween" />
+        <ContentView>
+            <CollectionView
+                x:Name="DaysOfWeekView"
+                Margin="0,5,0,0"
+                HeightRequest="25"
+                ItemsSource="{Binding DaysOfWeek, Source={x:Reference CalendarContainerView}}">
+
+                <CollectionView.Style>
+                    <Style TargetType="{x:Type CollectionView}">
+                        <Setter Property="ItemTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <Label
+                                        Margin="2.5"
+                                        FontSize="15"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding .}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center"
+                                        WidthRequest="45" />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </CollectionView.Style>
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="{Binding DaysOfWeek.Count, Source={x:Reference CalendarContainerView}}" />
+                </CollectionView.ItemsLayout>
+
+            </CollectionView>
+        </ContentView>
         <!--  日期天  -->
         <calendar:DaysView
-            x:Name="MainDaysView"
+            x:Name="DaysView"
             DaysOfWeek="{Binding DaysOfWeek, Source={x:Reference CalendarContainerView}}"
             HeightRequest="300" />
     </VerticalStackLayout>

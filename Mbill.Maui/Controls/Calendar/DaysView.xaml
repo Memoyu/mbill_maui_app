@@ -3,14 +3,10 @@
     x:Class="Mbill.Maui.Controls.Calendar.DaysView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:calendar="using:Mbill.Maui.Controls.Calendar"
     xmlns:model="using:Mbill.Maui.Controls.Calendar.Model"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     x:Name="CalendarDaysView">
-    <CollectionView x:Name="MainCollectionView" BackgroundColor="Aqua">
-
-        <CollectionView.Resources>
-            <system:Boolean x:Key="FalseValue">False</system:Boolean>
-        </CollectionView.Resources>
+    <CollectionView x:Name="MainCollectionView">
 
         <CollectionView.Style>
             <Style TargetType="{x:Type CollectionView}">
@@ -21,13 +17,21 @@
                                 Margin="2.5"
                                 BackgroundColor="Transparent"
                                 HeightRequest="45"
+                                HorizontalOptions="Center"
+                                StrokeThickness="0"
+                                VerticalOptions="Center"
                                 WidthRequest="45">
 
                                 <Border.StrokeShape>
                                     <Ellipse />
                                 </Border.StrokeShape>
 
-                                <Label Text="{Binding Day}" />
+                                <calendar:DayView
+                                    Date="{Binding Date}"
+                                    IsCurrentMonth="{Binding IsCurrentMonth}"
+                                    IsInvalid="{Binding IsInvalid}"
+                                    IsSelected="{Binding IsSelected}"
+                                    IsToday="{Binding IsToday}" />
 
                                 <Border.GestureRecognizers>
                                     <!--<TapGestureRecognizer Command="{Binding Command, Source={x:Reference CalendarDaysView}}" CommandParameter="{Binding CommandParameter, Source={x:Reference CalendarDaysView}}" />-->

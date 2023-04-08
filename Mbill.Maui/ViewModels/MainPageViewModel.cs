@@ -8,14 +8,13 @@ namespace Mbill.Maui.ViewModels
 {
     public partial class MainPageViewModel : ViewModelBase
     {
-        [ObservableProperty]
-        private string title = "Text";
+        [ObservableProperty] string title = "Text";
 
-        [ObservableProperty] private List<Planet> planets;
+        [ObservableProperty] List<Planet> planets;
 
-        [ObservableProperty] private  List<CalendarDay> calendarDays;
+        [ObservableProperty] List<CalendarDay> calendarDays;
 
-        private  readonly PlanetsService _planetsService;
+        private readonly PlanetsService _planetsService;
 
         public MainPageViewModel(PlanetsService planetsService)
         {
@@ -26,6 +25,14 @@ namespace Mbill.Maui.ViewModels
         {
             Trace.WriteLine("msg");
             Planets = _planetsService.GetAllPlanets();
+    
+            var items = new List<CalendarDay>();
+            for (int i = 1; i < 32; i++)
+            {
+                // items.Add(new CalendarDay { Date = i.ToString() });
+            }
+
+            CalendarDays = items;
             await Task.CompletedTask;
         }
 
@@ -38,14 +45,6 @@ namespace Mbill.Maui.ViewModels
         {
             Title = arg;
             await Task.CompletedTask;
-
-            var items = new List<CalendarDay>();
-            for (int i = 1; i < 32; i++)
-            {
-                items.Add(new CalendarDay { Day = i.ToString() });
-            }
-
-            CalendarDays = items;
         }
     }
 }

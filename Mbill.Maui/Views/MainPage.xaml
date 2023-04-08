@@ -32,7 +32,7 @@
                 Grid.Column="1"
                 HeightRequest="70"
                 Stroke="{StaticResource Primary}"
-                StrokeThickness="1 "
+                StrokeThickness="1"
                 WidthRequest="70">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="100" />
@@ -41,16 +41,9 @@
                     <TapGestureRecognizer Command="{Binding ExecuteCommand}" CommandParameter="5555" />
                 </Border.GestureRecognizers>
                 <Image
-                    HeightRequest="50"
+                    HeightRequest="70"
                     Source="avatar.png"
-                    WidthRequest="50">
-                    <Image.Clip>
-                        <EllipseGeometry
-                            Center="25,25"
-                            RadiusX="25"
-                            RadiusY="25" />
-                    </Image.Clip>
-                </Image>
+                    WidthRequest="70" />
             </Border>
 
 
@@ -64,9 +57,9 @@
                 <Grid RowDefinitions="Auto,Auto,*,*,*">
                     <!--  账本日历  -->
                     <calendar:CalendarView
+                        x:Name="CalendarView"
                         Grid.Row="0"
-                        Grid.Column="0"
-                        Days="{Binding CalendarDays, Mode=OneWayToSource}" />
+                        Grid.Column="0" />
 
 
                     <Border

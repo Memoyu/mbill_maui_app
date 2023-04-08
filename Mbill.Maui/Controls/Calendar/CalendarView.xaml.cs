@@ -4,31 +4,50 @@ namespace Mbill.Maui.Controls.Calendar;
 
 public partial class CalendarView : ContentView
 {
-
-    public IList<string> DaysOfWeek
+    public IEnumerable<string> DaysOfWeek
     {
-        get => (IList<string>)GetValue(DaysOfWeekProperty);
-        set => SetValue(DaysOfWeekProperty, value);
+        get => new List<string> { "一", "二", "三", "四", "五", "六", "日" };
     }
 
-    public static readonly BindableProperty DaysOfWeekProperty = BindableProperty.Create(nameof(DaysOfWeek), typeof(IList<string>), typeof(CalendarView), new List<string> { "一", "二", "三", "四", "五", "六", "日" });
-
-
-    public IEnumerable<CalendarDay> Days
+    public IEnumerable<CalendarDay> FirstDays
     {
-        get => (IEnumerable<CalendarDay>)GetValue(DaysProperty);
-        set => SetValue(DaysProperty, value);
+        get => new List<CalendarDay> { new CalendarDay { Date = DateTime.Now } };
     }
-    public static readonly BindableProperty DaysProperty = BindableProperty.Create(nameof(DaysProperty), typeof(IEnumerable<CalendarDay>), typeof(CalendarView), propertyChanged: DaysPropertyChanged);
+
     public CalendarView()
     {
         InitializeComponent();
+        DaysView.Days = BuildDate(DateTime.Now);
     }
 
-    private static void DaysPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    private List<CalendarDay> BuildDate(DateTime date)
     {
-        CalendarView control = (CalendarView)bindable;
-        IEnumerable<CalendarDay> newDays = (IEnumerable<CalendarDay>)newValue;
-        control.MainDaysView.Days = newDays;
+        var days = new List<CalendarDay>();
+        var currentDate = new DateTime(date.Year, date.Month, 1);
+
+        // 获取本月第一天所在周的 上周日的日期
+        while (currentDate.DayOfWeek != DayOfWeek.Sunday)
+        {
+            currentDate = currentDate.AddDays(-1);
+        }
+
+        // 一共获取42天（6w * 7d）
+        while (days.Count < 42)
+        {
+            currentDate = currentDate.AddDays(1);
+            days.Add(BuildCalendarDay(date, currentDate));
+        }
+
+        return days;
+    }
+
+    private CalendarDay BuildCalendarDay(DateTime date, DateTime currentDate)
+    {
+        return new CalendarDay
+        {
+            Date = currentDate,
+            IsCurrentMonth = currentDate.Month == date.Month && currentDate.Year == date.Year,
+            IsToday = currentDate.Date == DateTime.Today,
+        };
     }
 }
