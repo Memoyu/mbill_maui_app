@@ -27,15 +27,13 @@
                                 </Border.StrokeShape>
 
                                 <calendar:DayView
+                                    Command="{Binding DateSelectionCommand, Source={x:Reference CalendarDaysView}}"
+                                    CommandParameter="{Binding .}"
                                     Date="{Binding Date}"
                                     IsCurrentMonth="{Binding IsCurrentMonth}"
                                     IsInvalid="{Binding IsInvalid}"
                                     IsSelected="{Binding IsSelected}"
                                     IsToday="{Binding IsToday}" />
-
-                                <Border.GestureRecognizers>
-                                    <!--<TapGestureRecognizer Command="{Binding Command, Source={x:Reference CalendarDaysView}}" CommandParameter="{Binding CommandParameter, Source={x:Reference CalendarDaysView}}" />-->
-                                </Border.GestureRecognizers>
                             </Border>
                         </DataTemplate>
                     </Setter.Value>

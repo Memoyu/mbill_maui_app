@@ -44,6 +44,6 @@
         <calendar:DaysView
             x:Name="DaysView"
             DaysOfWeek="{Binding DaysOfWeek, Source={x:Reference CalendarContainerView}}"
-            HeightRequest="300" />
+            HeightRequest="310" />
     </VerticalStackLayout>
 </ContentView>

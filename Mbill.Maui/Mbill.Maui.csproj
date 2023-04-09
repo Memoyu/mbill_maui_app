@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net7.0-maccatalyst;net7.0-ios;net7.0-android</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -10,6 +10,7 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<!--<AndroidPackageFormat>apk</AndroidPackageFormat>-->
 
 		<!-- Display name -->
 		<ApplicationTitle>Mbill.Maui</ApplicationTitle>
@@ -28,6 +29,19 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<!--<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<RunAOTCompilation>true</RunAOTCompilation>
+		<EnableLLVM>true</EnableLLVM>
+	</PropertyGroup>-->
+
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+		<AndroidKeyStore>True</AndroidKeyStore>
+		<AndroidSigningKeyStore>..\memoyu.keystore</AndroidSigningKeyStore>
+		<AndroidSigningKeyAlias>memoyu</AndroidSigningKeyAlias>
+		<AndroidSigningKeyPass>code6076</AndroidSigningKeyPass>
+		<AndroidSigningStorePass>code6076</AndroidSigningStorePass>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -66,7 +80,6 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="3.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
-		<PackageReference Include="Material.Components.Maui" Version="0.1.2-beta" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
@@ -96,6 +109,12 @@
 	  <MauiXaml Update="Controls\Calendar\DayView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Platforms\Android\AndroidManifest.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

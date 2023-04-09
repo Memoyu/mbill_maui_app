@@ -109,7 +109,7 @@ public partial class DayView : ContentView
         set { SetValue(TodayTextColorProperty, value); }
     }
     public static readonly BindableProperty TodayTextColorProperty =
-        BindableProperty.Create(nameof(TodayTextColor), typeof(Color), typeof(DayView), Colors.Black);
+        BindableProperty.Create(nameof(TodayTextColor), typeof(Color), typeof(DayView), Color.FromArgb("#A6B1E1"));
     
     public Color TodayBackgroundColor
     {

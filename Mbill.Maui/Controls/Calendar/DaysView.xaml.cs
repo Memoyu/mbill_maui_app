@@ -19,16 +19,12 @@ public partial class DaysView : ContentView
     }
     public static readonly BindableProperty DaysProperty = BindableProperty.Create(nameof(DaysProperty), typeof(IEnumerable<CalendarDay>), typeof(DaysView), propertyChanged: OnDaysPropertyChanged);
 
-    public ICommand SelectedCommand
-    {
-        get => (ICommand)GetValue(SelectedCommandProperty);
-        set => SetValue(SelectedCommandProperty, value);
-    }
-    public static readonly BindableProperty SelectedCommandProperty = BindableProperty.Create(nameof(SelectedCommand), typeof(ICommand), typeof(DaysView), propertyChanged: StateAppearanceChanged);
+    public ICommand DateSelectionCommand { get;set; }
 
     public DaysView()
     {
         InitializeComponent();
+        DateSelectionCommand = new Command<CalendarDay>(OnDateSelection);
     }
 
     private static void OnDaysPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -38,9 +34,18 @@ public partial class DaysView : ContentView
         control.MainCollectionView.ItemsSource = newDays;
     }
 
-    private static void StateAppearanceChanged(BindableObject bindable, object oldValue, object newValue)
+    private void OnDateSelection(CalendarDay selected)
     {
-        DaysView control = (DaysView)bindable;
-        // control.UpdateView();
+        foreach (CalendarDay day in Days) 
+        {
+            if (day.Date == selected.Date)
+            {
+                day.IsSelected = true;
+            }
+            else
+            {
+                day.IsSelected = false;
+            }
+        }
     }
 }

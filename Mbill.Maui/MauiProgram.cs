@@ -6,11 +6,11 @@ namespace Mbill.Maui;
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
+    public static MauiApp CreateMauiApp()
+    {
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
@@ -18,12 +18,6 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("iconfont.ttf", "iconfont");
             });
-        //        .UseMaterialComponents(new List<string>
-        //        {
-        //            "OpenSans-Regular.ttf",
-        //"OpenSans-Semibold.ttf", 
-        //            "iconfont.ttf"
-        //        });
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -33,5 +27,5 @@ public static class MauiProgram
         builder.Services.AddServices();
 
         return builder.Build();
-	}
+    }
 }
