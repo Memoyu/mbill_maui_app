@@ -1,4 +1,5 @@
 using Mbill.Maui.Controls.Calendar.Model;
+using Mbill.Maui.Models;
 
 namespace Mbill.Maui.Controls.Calendar;
 
@@ -9,15 +10,22 @@ public partial class CalendarView : ContentView
         get => new List<string> { "一", "二", "三", "四", "五", "六", "日" };
     }
 
-    public IEnumerable<CalendarDay> FirstDays
+    public IEnumerable<CalendarDay> FirstDays { get; set; }
+
+    public IEnumerable<BillTagModel> BillTags
     {
-        get => new List<CalendarDay> { new CalendarDay { Date = DateTime.Now } };
+        get { return (IEnumerable<BillTagModel>)GetValue(BillTagsProperty); }
+        set { SetValue(BillTagsProperty, value); }
     }
+    public static readonly BindableProperty BillTagsProperty =
+        BindableProperty.Create(nameof(BillTagsProperty), typeof(IEnumerable<BillTagModel>), typeof(DaysView), propertyChanged: OnBillTagsPropertyChanged);
 
     public CalendarView()
     {
+        FirstDays = BuildDate(DateTime.Now);
+
         InitializeComponent();
-        DaysView.Days = BuildDate(DateTime.Now);
+        // DaysView.Days = BuildDate(DateTime.Now);
     }
 
     private List<CalendarDay> BuildDate(DateTime date)
@@ -43,11 +51,25 @@ public partial class CalendarView : ContentView
 
     private CalendarDay BuildCalendarDay(DateTime date, DateTime currentDate)
     {
+        var isToday = currentDate.Date == DateTime.Today;
         return new CalendarDay
         {
             Date = currentDate,
             IsCurrentMonth = currentDate.Month == date.Month && currentDate.Year == date.Year,
-            IsToday = currentDate.Date == DateTime.Today,
+            IsToday = isToday,
+            IsSelected = isToday
         };
+    }
+
+    private static void OnBillTagsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        CalendarView control = bindable as CalendarView;
+        IEnumerable<BillTagModel> billTags = newValue as IEnumerable<BillTagModel>;
+
+        foreach (var tag in billTags)
+        {
+            var day = control.FirstDays.FirstOrDefault(d => tag.Year == d.Date.Year && tag.Month == d.Date.Month && tag.Day == d.Date.Day);
+            if (day != null) day.IsHasBill = true;
+        }
     }
 }

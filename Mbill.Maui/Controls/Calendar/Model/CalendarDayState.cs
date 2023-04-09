@@ -5,6 +5,5 @@ public enum CalendarDayState
     CurrentMonth,
     OtherMonth,
     Today,
-    Selected,
-    Invalid
+    Selected
 }

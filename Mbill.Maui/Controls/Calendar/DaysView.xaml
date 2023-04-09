@@ -31,7 +31,7 @@
                                     CommandParameter="{Binding .}"
                                     Date="{Binding Date}"
                                     IsCurrentMonth="{Binding IsCurrentMonth}"
-                                    IsInvalid="{Binding IsInvalid}"
+                                    IsHasBill="{Binding IsHasBill}"
                                     IsSelected="{Binding IsSelected}"
                                     IsToday="{Binding IsToday}" />
                             </Border>

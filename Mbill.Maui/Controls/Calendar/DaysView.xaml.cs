@@ -10,14 +10,16 @@ public partial class DaysView : ContentView
         get => (IList<string>)GetValue(DaysOfWeekProperty);
         set => SetValue(DaysOfWeekProperty, value);
     }
-    public static readonly BindableProperty DaysOfWeekProperty = BindableProperty.Create(nameof(DaysOfWeek), typeof(IList<string>), typeof(DaysView));
+    public static readonly BindableProperty DaysOfWeekProperty =
+        BindableProperty.Create(nameof(DaysOfWeek), typeof(IList<string>), typeof(DaysView));
 
     public IEnumerable<CalendarDay> Days
     {
         get => (IEnumerable<CalendarDay>)GetValue(DaysProperty);
         set => SetValue(DaysProperty, value);
     }
-    public static readonly BindableProperty DaysProperty = BindableProperty.Create(nameof(DaysProperty), typeof(IEnumerable<CalendarDay>), typeof(DaysView), propertyChanged: OnDaysPropertyChanged);
+    public static readonly BindableProperty DaysProperty =
+        BindableProperty.Create(nameof(DaysProperty), typeof(IEnumerable<CalendarDay>), typeof(DaysView), propertyChanged: OnDaysPropertyChanged);
 
     public ICommand DateSelectionCommand { get;set; }
 
@@ -29,8 +31,8 @@ public partial class DaysView : ContentView
 
     private static void OnDaysPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        DaysView control = (DaysView)bindable;
-        IEnumerable<CalendarDay> newDays = (IEnumerable<CalendarDay>)newValue;
+        DaysView control = bindable as DaysView;
+        IEnumerable<CalendarDay> newDays = newValue as IEnumerable<CalendarDay>;
         control.MainCollectionView.ItemsSource = newDays;
     }
 

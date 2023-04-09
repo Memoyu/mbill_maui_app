@@ -38,13 +38,13 @@ public partial class DayView : ContentView
     public static readonly BindableProperty IsSelectedProperty =
         BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(DayView), propertyChanged: OnStatePropertyChanged);
     
-    public bool IsInvalid
+    public bool IsHasBill
     {
-        get { return (bool)GetValue(IsInvalidProperty); }
-        set { SetValue(IsInvalidProperty, value); }
+        get { return (bool)GetValue(IsHasBillProperty); }
+        set { SetValue(IsHasBillProperty, value); }
     }
-    public static readonly BindableProperty IsInvalidProperty =
-        BindableProperty.Create(nameof(IsInvalid), typeof(bool), typeof(DayView), propertyChanged: OnStatePropertyChanged);
+    public static readonly BindableProperty IsHasBillProperty =
+        BindableProperty.Create(nameof(IsHasBill), typeof(bool), typeof(DayView), propertyChanged: OnStatePropertyChanged);
 
 
     public CalendarDayState DayState
@@ -173,11 +173,8 @@ public partial class DayView : ContentView
     {
         bool isOtherMonth = !IsCurrentMonth;
 
-        if (IsInvalid)
-        {
-            return CalendarDayState.Invalid;
-        }
-        else if (IsSelected && IsCurrentMonth)
+        
+        if (IsSelected && IsCurrentMonth)
         {
             return CalendarDayState.Selected;
         }
@@ -221,11 +218,6 @@ public partial class DayView : ContentView
             case CalendarDayState.Selected:
                 BackgroundColor = SelectedBackgroundColor;
                 control.CalendarDay.TextColor = SelectedTextColor;
-                break;
-
-            case CalendarDayState.Invalid:
-                BackgroundColor = InvalidBackgroundColor;
-                control.CalendarDay.TextColor = InvalidTextColor;
                 break;
 
             default:

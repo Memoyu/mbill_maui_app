@@ -4,14 +4,41 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:calendar="using:Mbill.Maui.Controls.Calendar"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Name="CalendarDayView"
     x:DataType="{x:Type calendar:DayView}">
-    <Label
-        x:Name="CalendarDay"
-        HorizontalTextAlignment="Center"
-        Text="{Binding Date.Day}"
-        VerticalTextAlignment="Center" />
+    <ContentView.Resources>
+        <mct:VariableMultiValueConverter x:Key="AllTrueConverter" ConditionType="All" />
+        <mct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentView.Resources>
+    <Grid RowDefinitions="1.5*, *" RowSpacing="2">
+        <Label
+            x:Name="CalendarDay"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            HorizontalTextAlignment="Center"
+            Text="{Binding Date.Day}"
+            VerticalTextAlignment="Center" />
 
+        <BoxView
+            Grid.Row="1"
+            CornerRadius="100"
+            HeightRequest="5"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="Center"
+            WidthRequest="5"
+            Color="Red">
+            <BoxView.IsVisible>
+                <MultiBinding Converter="{StaticResource AllTrueConverter}">
+                    <!--  目前非当月的也展示是否存在账单  -->
+                    <!--<Binding Path="IsCurrentMonth" />-->
+                    <Binding Path="IsHasBill" />
+                </MultiBinding>
+            </BoxView.IsVisible>
+        </BoxView>
+
+
+    </Grid>
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding Command, Source={x:Reference CalendarDayView}}" CommandParameter="{Binding CommandParameter, Source={x:Reference CalendarDayView}}" />
     </ContentView.GestureRecognizers>

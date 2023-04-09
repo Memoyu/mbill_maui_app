@@ -57,7 +57,8 @@
                     <calendar:CalendarView
                         x:Name="CalendarView"
                         Grid.Row="0"
-                        Grid.Column="0" />
+                        Grid.Column="0"
+                        BillTags="{Binding BillTasgs}" />
 
 
                     <Border

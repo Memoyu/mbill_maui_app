@@ -43,6 +43,7 @@
         <!--  日期天  -->
         <calendar:DaysView
             x:Name="DaysView"
+            Days="{Binding FirstDays, Source={x:Reference CalendarContainerView}}"
             DaysOfWeek="{Binding DaysOfWeek, Source={x:Reference CalendarContainerView}}"
             HeightRequest="310" />
     </VerticalStackLayout>

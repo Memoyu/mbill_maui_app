@@ -12,7 +12,7 @@ namespace Mbill.Maui.ViewModels
 
         [ObservableProperty] List<Planet> planets;
 
-        [ObservableProperty] List<CalendarDay> calendarDays;
+        [ObservableProperty] List<BillTagModel> billTasgs;
 
         private readonly PlanetsService _planetsService;
 
@@ -25,14 +25,6 @@ namespace Mbill.Maui.ViewModels
         {
             Trace.WriteLine("msg");
             Planets = _planetsService.GetAllPlanets();
-    
-            var items = new List<CalendarDay>();
-            for (int i = 1; i < 32; i++)
-            {
-                // items.Add(new CalendarDay { Date = i.ToString() });
-            }
-
-            CalendarDays = items;
             await Task.CompletedTask;
         }
 
@@ -44,6 +36,13 @@ namespace Mbill.Maui.ViewModels
         async Task Execute(string arg)
         {
             Title = arg;
+
+            var items = new List<BillTagModel>();
+            items.Add(new BillTagModel { Year = 2023, Month = 4, Day = 1 });
+            items.Add(new BillTagModel { Year = 2023, Month = 4, Day = 9 });
+            items.Add(new BillTagModel { Year = 2023, Month = 4, Day = 20 });
+            BillTasgs = items;
+
             await Task.CompletedTask;
         }
     }
